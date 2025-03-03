@@ -4,6 +4,8 @@ import org.junit.Rule
 import org.junit.Test
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.printToLog
 
 class RallyScreen {
     companion object {
@@ -35,3 +37,20 @@ class TopAppBarTest {
             .onNodeWithContentDescription(RallyScreen.Accounts.name)
             .assertIsSelected()
     }
+}
+
+fun rallyTopAppBarTest_currentLabelExists() {
+    val allScreens = RallyScreen.values().toList()
+    val composeTestRule = null
+    composeTestRule.setContent {
+        RallyTopAppBar(
+            allScreens = allScreens,
+            onTabSelected = { },
+            currentScreen = RallyScreen.Accounts
+        )
+    }
+
+    composeTestRule
+        .onNodeWithContentDescription(RallyScreen.Accounts.name)
+        .assertExists()
+}
